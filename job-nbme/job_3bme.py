@@ -21,10 +21,11 @@ partition = "c128m512"
 # 3-body SRG space
 # ramp_space = "ramp40-5-36-7-32-9-28-11-24"  # This should be enough up to 40Ca or so. From Phys. Rev. C90, 024325 (2014).
 # ramp_space = "ramp40-7-38-9-36" # This should be enough up to A~100. From Phys. Lett. B736, 119 (2014).
+ramp_space = "ramp12"  # only for testing
 # ramp_space = "ramp46"
-ramp_space = "ramp12"
 
-# NNF, TNF = "N3LO_EM500", "EM1.8_2.0"
+
+NNF, TNF = "N3LO_EM500", "EM1.8_2.0"
 # NNF, TNF = "N3LO_EM500", "EM7.5"
 # NNF, TNF = "N3LO_EM500", "EM2.0_2.0"
 # NNF, TNF = "N3LO_EM500", "EM2.0_2.5"
@@ -35,13 +36,14 @@ ramp_space = "ramp12"
 # NNF, TNF = "DNLOGO450", "DNLOGO450"
 # NNF, TNF = "DN2LOGO450", "DN2LOGO450"
 # NNF, TNF = "DN2LOGO394", "DN2LOGO394"
-NNF, TNF = "N3LO_EM500", "N3LOEMlnl"
+# NNF, TNF = "N3LO_EM500", "N3LOEMlnl"
 # NNF, TNF = "N4LO_EMN500", "N4LOEMNlnl"
 # NNF, TNF = "N3LO_local1.2", "local"
 # NNF, TNF = "N3LO_local1.2", "lnl"
 # NNF, TNF  = "N3LO_texas", "N3LO_texas"
 
-ext_3bme = ".me3j.gz"
+# ext_3bme = ".me3j.gz"
+ext_3bme = ".stream.bin"
 
 hw_temp = None  # if using hw-conversion technique...
 # hw_temp = 30
@@ -90,7 +92,7 @@ def set_input(params, hw=20, hw_target=None, emax=14, e2max=28, e3max=16):
     params["genuine_3bf"] = True
     params["only_no2b_elements"] = True
     # params['lab_3bme_precision'] = "half"
-    # params["path_to_Hebeler_files"]= "/lustre/home/2101110124/input_3n_files"
+    # params["path_to_Hebeler_files"] = "/Users/mac/Desktop/input_3n_files"
     params["path_to_tmp_dir"] = f"{HOME}/workspace"
     if params["genuine_3bf"]:
         set_three_body_force(params)
