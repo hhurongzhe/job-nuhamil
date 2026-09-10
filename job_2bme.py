@@ -32,7 +32,7 @@ NNF = "N3LO_EM500"
 ext_2bme = ".me2j.bin"
 
 hw_list = [16, 20]
-emax_list = [6, 12, 14]
+emax_list = [6]
 # hw_list = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]
 # emax_list = [2, 4, 6, 8, 10, 12, 14, 16]
 
