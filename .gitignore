@@ -1,8 +1,8 @@
 .DS_Store
 */__pycache__
-result/*
-script/*
-workspace/*
+!result/.gitkeep
+!script/.gitkeep
+!workspace/.gitkeep
 *.gz
 *.snt
 *.log
