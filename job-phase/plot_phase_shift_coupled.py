@@ -15,8 +15,8 @@ def main():
     Lstring = ["S", "P", "D", "F", "G", "H"]
     ini_plot()
     fig, axs = plt.subplots(3, 2, figsize=(3, 4), sharex=True, sharey=False)
-    df = pd.read_csv("phase-shift-analysis/Nijmegen.csv", sep="\s*,\s*", engine="python")
-    NNlist = ["N3LO_EM500"]
+    df = pd.read_csv("job-phase/Nijmegen.csv", sep="\s*,\s*", engine="python")
+    NNlist = ["TPL_LO500", "TPL_LO600"]
     S = 1
     for J in range(1, 3):
         axs[2, J - 1].set_xlabel(r"$T_{\rm lab}$ (MeV)", fontsize=fs + 2)
@@ -77,6 +77,7 @@ def main():
 
     axs[0, 0].legend(fontsize=fs, loc="upper right", frameon=False)
     fig.tight_layout()
+    plt.savefig(f"fig_phase_shift_coupled.pdf", bbox_inches="tight", transparent=False, dpi=1200)
     plt.show()
 
 

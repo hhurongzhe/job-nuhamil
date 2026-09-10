@@ -27,11 +27,12 @@ elif batch == "slurm":
     header += "#SBATCH --output=./result/slurm-%j.out\n"
     header += "source sourceme.sh\n"
 
-NNF = "N2LO_opt"
-ext_2bme = ".me2j.gz"
+NNF = "N3LO_EM500"
+# ext_2bme = ".MFDn"
+ext_2bme = ".me2j.bin"
 
-hw_list = [20]
-emax_list = [10]
+hw_list = [16, 20]
+emax_list = [6, 12, 14]
 # hw_list = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]
 # emax_list = [2, 4, 6, 8, 10, 12, 14, 16]
 
@@ -39,8 +40,11 @@ emax_list = [10]
 def set_input(params, hw=20, emax=14, e2max=28):
     params["rank"] = 2
     params["hw"] = hw
+    # params["Operators"] = "kinetic"
+    # params["Operators"] = "Hcm"
+    # params["Operators"] = f"HOHamil{hw}"
     params["renorm"] = "bare"
-    params["lambda"] = 2.0
+    params["lambda"] = 1.8
     params["emax"] = emax
     params["e2max"] = e2max
     params["NNInt"] = NNF
@@ -101,7 +105,12 @@ def gen_script(params, batch):
 
 def set_file_name_nn(params):
     try:
-        f = "TwBME_" + params["NNInt"] + "_" + params["renorm"]
+        f = "TwBME_"
+        if "Operators" in params:
+            f += params["Operators"] + "_"
+        else:
+            f += params["NNInt"] + "_"
+        f += params["renorm"]
         if params["renorm"] != "Bare" and params["renorm"] != "bare":
             f += str(params["lambda"])
         f += "_hw" + str(params["hw"]) + "_emax" + str(params["emax"])

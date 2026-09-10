@@ -17,8 +17,8 @@ def main():
     Lstring = ["S", "P", "D", "F", "G"]
     ini_plot()
     fig, axs = plt.subplots(2, 3, figsize=(5, 4), sharex=True, sharey=False)
-    df = pd.read_csv("phase-shift-analysis/Nijmegen.csv", sep="\s*,\s*", engine="python")
-    NNlist = ["N3LO_EM500"]
+    df = pd.read_csv("job-phase/Nijmegen.csv", sep="\s*,\s*", engine="python")
+    NNlist = ["TPL_LO500", "TPL_LO600"]
     for J in range(3):
         for S, P in itertools.product(range(2), [1, -1]):
             if S == 1:
@@ -62,8 +62,8 @@ def main():
 
     axs[0, 0].legend(fontsize=fs, loc="upper right", frameon=False)
     fig.tight_layout()
+    plt.savefig(f"fig_phase_shift_uncoupled.pdf", bbox_inches="tight", transparent=False, dpi=1200)
     plt.show()
-    # plt.savefig("uncoupled.pdf")
 
 
 if __name__ == "__main__":

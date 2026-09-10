@@ -25,7 +25,7 @@ ramp_space = "ramp12"  # only for testing
 # ramp_space = "ramp46"
 
 
-NNF, TNF = "N3LO_EM500", "EM1.8_2.0"
+# NNF, TNF = "N3LO_EM500", "EM1.8_2.0"
 # NNF, TNF = "N3LO_EM500", "EM7.5"
 # NNF, TNF = "N3LO_EM500", "EM2.0_2.0"
 # NNF, TNF = "N3LO_EM500", "EM2.0_2.5"
@@ -40,7 +40,7 @@ NNF, TNF = "N3LO_EM500", "EM1.8_2.0"
 # NNF, TNF = "N4LO_EMN500", "N4LOEMNlnl"
 # NNF, TNF = "N3LO_local1.2", "local"
 # NNF, TNF = "N3LO_local1.2", "lnl"
-# NNF, TNF  = "N3LO_texas", "N3LO_texas"
+NNF, TNF  = "N3LO_texas", "N3LO_texas"
 
 # ext_3bme = ".me3j.gz"
 ext_3bme = ".stream.bin"
@@ -75,8 +75,9 @@ def set_input(params, hw=20, hw_target=None, emax=14, e2max=28, e3max=16):
     params["hw"] = hw
     if hw_target != None:
         params["hw_target"] = hw_target  # hw conversion
-    params["renorm"] = "bare"
+    params["renorm"] = "srg"
     params["lambda"] = 2.0
+    params["cached_lambdas"] = "3.2,3.0,2.8,2.6,2.4,2.2,2.0"
     params["emax"] = emax
     params["e2max"] = e2max
     params["e3max"] = e3max
@@ -343,8 +344,8 @@ def set_three_body_force(params):
         params["RegulatorPower"] = 4
         params["LECs"] = [-1.07, -5.32, 3.56, -5.060563, -1.034629]
         params["lambda_3nf_nonlocal"] = 394
-        if params["rank"] > 2:
-            params["renorm"] = "bare"
+        # if params["rank"] > 2:
+        #     params["renorm"] = "bare"
         return
 
     print("Unknown three-body force keyword" + params["3nf"])
@@ -360,6 +361,8 @@ def set_file_name_3n(params):
             f += "_NO2B"
         else:
             f += "_full"
+        if params["renorm"] not in ["bare", "Bare"]:
+            f += "_" + str(params["renorm"]) + str(params["lambda"])
         if "lab_3bme_precision" in params and params["lab_3bme_precision"] != "single":
             f += "_{:s}".format(params["lab_3bme_precision"])
         if params["3nf"] in ["EM1.8_2.0", "EM2.0_2.0", "EM2.0_2.5", "EM2.2_2.0", "EM2.8_2.0", "PWA2.0_2.0", "N2LOsat", "DN2LOGO394", "DN2LOGO450", "DNLOGO450", "EM7.5", "N3LO_NoggaA", "N3LO_NoggaB", "3NF400", "3NF500_BetaDecay_Local", "N3LOEMlnl", "N4LOEMNlnl", "local", "lnl", "N3LO_texas"]:

@@ -12,6 +12,8 @@ workspace_dir = "/Users/mac/Desktop/job-NuHamil"
 path_to_nninput = f"{workspace_dir}/input_nn_files"
 exe_file = f"{workspace_dir}/NuHamil.exe"
 
+NNlist = ["TPL_LO500", "TPL_LO600"]
+
 
 def set_input(params, NNint):
     # basic parameters
@@ -22,7 +24,10 @@ def set_input(params, NNint):
     params["renorm_space2"] = "mom"
 
     params["NNInt"] = NNint
-    params["input_nn_file"] = f"{path_to_nninput}/{params['NNInt']}_kmax8_N100_Jmax8.bin"
+    # params["input_nn_file"] = f"{path_to_nninput}/{params['NNInt']}_kmax8_N100_Jmax8.bin"
+    params["input_nn_file"] = f"{path_to_nninput}/{params['NNInt']}_N120_Jmax8.bin"
+    params["nmesh2"] = 120
+    params["pmax2"] = 20.0
     params["J2max_NNint"] = 2
     # params["Tlab_phase_shift"] = "1,5,10,25,50,75,100,125,150,175,200,225,250,275,300,325,350"
     params["Tlab_phase_shift"] = ",".join(f"{i/1.0:g}" for i in range(1, 350 + 1))
@@ -69,7 +74,6 @@ def gen_script(params):
 
 def main(machinename=None):
     params = OrderedDict()
-    NNlist = ["N3LO_EM500"]
     for NN in NNlist:
         set_input(params, NN)
         fsh = gen_script(params)
