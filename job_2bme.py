@@ -27,12 +27,12 @@ elif batch == "slurm":
     header += "#SBATCH --output=./result/slurm-%j.out\n"
     header += "source sourceme.sh\n"
 
-NNF = "N3LO_EM500"
+NNF = "Daejeon16"
 # ext_2bme = ".MFDn"
 ext_2bme = ".me2j.bin"
 
-hw_list = [16, 20]
-emax_list = [6]
+hw_list = [16]
+emax_list = [12]
 # hw_list = [2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32]
 # emax_list = [2, 4, 6, 8, 10, 12, 14, 16]
 
